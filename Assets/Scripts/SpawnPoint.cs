@@ -45,6 +45,6 @@ public class SpawnPoint : MonoBehaviour
 
     private Vector3 GenerateDirection()
     {
-        return new Vector3(0f, Random.Range(0, 360), 0f);
+        return new Vector3(Random.Range(-360, 360), 0, Random.Range(-360, 360)).normalized;
     }
 }

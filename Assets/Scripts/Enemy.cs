@@ -5,30 +5,35 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    private Transform _target;
+    private Vector3 _direction;
 
     public event Action<Enemy> Died;
+
+    private void Start()
+    {
+        transform.rotation = Quaternion.Euler(_direction);
+    }
 
     private void Update()
     {
         Move();
     }
 
-    public void SetDirection(Vector3 direction)
-    {
-        transform.Rotate(direction);
-    }
-
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<Platform>(out Platform platform))
+        if (collision.gameObject.TryGetComponent(out Platform platform))
         {
             Died?.Invoke(this);
         }
     }
 
+    public void SetDirection(Vector3 direction)
+    {
+        _direction = direction;
+    }
+
     private void Move()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+        transform.Translate(_direction * _speed * Time.deltaTime);
     }
 }
