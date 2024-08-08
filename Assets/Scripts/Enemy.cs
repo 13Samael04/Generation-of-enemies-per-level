@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 
-
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] Rigidbody _rigidbody;
-    [SerializeField] float _speed;
+    [SerializeField] private float _speed;
 
     private Transform _target;
 
@@ -16,14 +14,14 @@ public class Enemy : MonoBehaviour
         Move();
     }
 
-    public void SetTarget(Transform target)
+    public void SetDirection(Vector3 direction)
     {
-        _target = target;
+        transform.Rotate(direction);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
-        if(other.gameObject.TryGetComponent<Target>(out Target target))
+        if (collision.gameObject.TryGetComponent<Platform>(out Platform platform))
         {
             Died?.Invoke(this);
         }
@@ -31,7 +29,6 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        transform.LookAt(_target);
-        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 }

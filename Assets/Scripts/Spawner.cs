@@ -21,8 +21,7 @@ public class Spawner : MonoBehaviour
 
         while (true)
         {
-            SpawnPoint spawnPoint = GetSpawnPoint();
-            spawnPoint.SpawnEnemy();
+            GetSpawnPoint().SpawnEnemy();
 
             yield return wait;
         }
