@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        transform.rotation = Quaternion.Euler(_direction);
+        transform.rotation = Quaternion.LookRotation(_direction);
     }
 
     private void Update()
@@ -30,10 +30,11 @@ public class Enemy : MonoBehaviour
     public void SetDirection(Vector3 direction)
     {
         _direction = direction;
+        Debug.Log(_direction);
     }
 
     private void Move()
     {
-        transform.Translate(_direction * _speed * Time.deltaTime);
+        transform.Translate(_direction * _speed * Time.deltaTime, Space.World);
     }
 }

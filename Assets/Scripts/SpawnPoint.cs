@@ -4,7 +4,6 @@ using UnityEngine.Pool;
 public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] private Enemy _enemyPrefab;
-    [SerializeField] private Transform _target;
 
     private int _initialSizePool = 5;
     private int _maxSizePool = 15;
@@ -45,6 +44,11 @@ public class SpawnPoint : MonoBehaviour
 
     private Vector3 GenerateDirection()
     {
-        return new Vector3(Random.Range(-360, 360), 0, Random.Range(-360, 360)).normalized;
+        float angle = Random.Range(0f, Mathf.PI * 2);
+
+        float x = Mathf.Cos(angle);
+        float z = Mathf.Sin(angle);
+
+        return new Vector3(x, 0, z);
     }
-}
+    }
