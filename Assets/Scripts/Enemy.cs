@@ -9,11 +9,6 @@ public class Enemy : MonoBehaviour
 
     public event Action<Enemy> Died;
 
-    private void Start()
-    {
-        transform.rotation = Quaternion.LookRotation(_direction);
-    }
-
     private void Update()
     {
         Move();
@@ -30,11 +25,15 @@ public class Enemy : MonoBehaviour
     public void SetDirection(Vector3 direction)
     {
         _direction = direction;
-        Debug.Log(_direction);
     }
 
     private void Move()
     {
         transform.Translate(_direction * _speed * Time.deltaTime, Space.World);
+    }
+
+    public void RotateToDirection()
+    {
+        transform.rotation = Quaternion.LookRotation(_direction);
     }
 }

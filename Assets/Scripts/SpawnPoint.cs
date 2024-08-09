@@ -39,6 +39,7 @@ public class SpawnPoint : MonoBehaviour
 
         enemy.transform.position = transform.position;
         enemy.SetDirection(GenerateDirection());
+        enemy.RotateToDirection();
         enemy.gameObject.SetActive(true);
     }
 
